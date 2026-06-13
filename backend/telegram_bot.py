@@ -115,11 +115,11 @@ def send_macro(message):
         bot.reply_to(message, "❌ Makro verilere ulaşılamadı.")
         return
         
-    text = "🌍 *MAKRO EKONOMİK DURUM & PİYASA*\n\n"
+    text = "🌍 MAKRO EKONOMİK DURUM & PİYASA\n\n"
     
     globals_data = data.get("global_markets", {})
     if globals_data:
-        text += "🌐 *Küresel Endeksler:*\n"
+        text += "🌐 Küresel Endeksler:\n"
         for name, info in globals_data.items():
             pct = info.get('percentage', 0.0)
             sign = "+" if pct > 0 else ""
@@ -128,30 +128,30 @@ def send_macro(message):
             
     sectors = data.get("sector_analysis", [])
     if sectors:
-        text += "📊 *Sektörel Isı Haritası:*\n"
+        text += "📊 Sektörel Isı Haritası:\n"
         for s in sectors:
             text += f"• {s.get('name')}: {s.get('trend')} (Skor: {s.get('score')})\n"
         text += "\n"
             
     cal = data.get("economic_calendar", [])
     if cal:
-        text += "🗓 *Bugünün Ekonomik Takvimi:*\n"
+        text += "🗓 Bugünün Ekonomik Takvimi:\n"
         for c in cal:
             text += f"• {c.get('time')} [{c.get('country')}] - {c.get('event')}\n"
             
     news = data.get("news", [])
     if news:
-        text += "\n📰 *Son Haberler:*\n"
+        text += "\n📰 Son Haberler:\n"
         for n in news[:3]:
             text += f"• {n.get('time')} - {n.get('title')} ({n.get('source')})\n"
 
-    bot.reply_to(message, text, parse_mode="Markdown")
+    bot.reply_to(message, text)
 
 @bot.message_handler(commands=['hisse'])
 def send_stock_info(message):
     parts = message.text.split()
     if len(parts) < 2:
-        bot.reply_to(message, "Lütfen bir hisse kodu girin. Örnek: `/hisse THYAO`", parse_mode="Markdown")
+        bot.reply_to(message, "Lütfen bir hisse kodu girin. Örnek: /hisse THYAO")
         return
         
     symbol = parts[1].upper()
@@ -167,16 +167,16 @@ def send_stock_info(message):
     outlook = data.get("outlook", {})
     range_est = data.get("range_estimate", {})
     
-    text = f"🎯 *{symbol} - DETAYLI ANALİZ*\n\n"
-    text += f"*{outlook.get('title', '')}*\n"
+    text = f"🎯 {symbol} - DETAYLI ANALİZ\n\n"
+    text += f"➤ {outlook.get('title', '')}\n"
     text += f"{outlook.get('description', '')}\n\n"
     
-    text += f"📈 *Destek / Direnç:*\n"
+    text += f"📈 Destek / Direnç:\n"
     text += f"Destek: {range_est.get('support', '')}\n"
     text += f"Direnç: {range_est.get('resistance', '')}\n"
     text += f"Trend Beklentisi: {range_est.get('trend', '')}\n"
     
-    bot.reply_to(message, text, parse_mode="Markdown")
+    bot.reply_to(message, text)
 
 def start():
     """Botu başlatan ana fonksiyon"""
