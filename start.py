@@ -69,20 +69,34 @@ except Exception as e:
     print(f"   ⚠️  BIST testi başarısız: {e}")
     print("   Sunucu yine de başlatılacak.\n")
 
-# 4. Sunucuyu başlat
+port = int(os.environ.get("PORT", 8000))
+
 print("\n" + "=" * 55)
 print("  🚀 SUNUCU BAŞLATILIYOR")
-print("  📊 http://127.0.0.1:8000")
+print(f"  📊 http://0.0.0.0:{port}")
 print("  🛑 Ctrl + C ile kapatın")
 print("=" * 55 + "\n")
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
+# Telegram botunu ayrı thread'de başlat
+def run_telegram_bot():
+    try:
+        from backend.telegram_bot import start as bot_start
+        print("✅ Telegram Bot Thread Başlatılıyor...")
+        bot_start()
+    except Exception as e:
+        print(f"❌ Telegram bot başlatılamadı: {e}")
+
+import threading
+telegram_thread = threading.Thread(target=run_telegram_bot, daemon=True)
+telegram_thread.start()
+
 import uvicorn
 uvicorn.run(
     "backend.app:app",
     host="0.0.0.0",
-    port=8000,
+    port=port,
     reload=False,
     log_level="info"
 )
