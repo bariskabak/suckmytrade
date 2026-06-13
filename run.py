@@ -14,6 +14,8 @@ def install_requirements():
         'pandas': 'pandas>=2.0.0',
         'numpy': 'numpy>=1.24.0',
         'websockets': 'websockets>=11.0',
+        'telebot': 'pyTelegramBotAPI>=4.12.0',
+        'dotenv': 'python-dotenv>=1.0.0',
     }
     for name, pkg in deps.items():
         try:
@@ -91,6 +93,13 @@ def main():
     # Gereksinimleri yükle
     install_requirements()
     
+    # .env dosyasını yükle (Lokal testler için)
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except Exception:
+        pass
+    
     port = int(os.environ.get("PORT", 8000))
     
     # Port temizle
@@ -107,6 +116,19 @@ def main():
     print("  🛑 Kapatmak için: Ctrl + C")
     print("=" * 55 + "\n")
     
+    # Telegram botunu ayrı thread'de başlat
+    def run_telegram_bot():
+        try:
+            from backend.telegram_bot import start as bot_start
+            print("✅ Telegram Bot Thread Başlatılıyor...")
+            bot_start()
+        except Exception as e:
+            print(f"❌ Telegram bot başlatılamadı: {e}")
+
+    import threading
+    telegram_thread = threading.Thread(target=run_telegram_bot, daemon=True)
+    telegram_thread.start()
+
     # Uvicorn ile FastAPI sunucusunu başlat
     # host="0.0.0.0" hem IPv4 hem IPv6 dinler
     try:
