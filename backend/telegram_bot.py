@@ -28,6 +28,8 @@ def send_welcome(message):
         "Aşağıdaki komutları kullanarak anlık verilere ulaşabilirsiniz:\n\n"
         "📊 /rapor - Güncel piyasa özeti ve sabah raporu\n"
         "🎯 /sinyaller - Güçlü AL/SAT sinyali veren hisseler\n"
+        "🌍 /makro - Makro ekonomik durum ve küresel endeksler\n"
+        "🔍 /hisse [KOD] - Seçtiğiniz hissenin detaylı analizi (Örn: /hisse THYAO)\n"
         "⚙️ /durum - Sistem sağlık durumu"
     )
     bot.reply_to(message, text, parse_mode="Markdown")
@@ -103,6 +105,77 @@ def send_report(message):
         for r in recs:
             text += f"• *{r.get('name', '')}*: {r.get('strategy', '')} (Hedef: {r.get('tp', '')})\n"
             
+    bot.reply_to(message, text, parse_mode="Markdown")
+
+@bot.message_handler(commands=['makro'])
+def send_macro(message):
+    bot.reply_to(message, "⏳ Makro veriler getiriliyor...")
+    data = fetch_api("morning-report")
+    if not data:
+        bot.reply_to(message, "❌ Makro verilere ulaşılamadı.")
+        return
+        
+    text = "🌍 *MAKRO EKONOMİK DURUM & PİYASA*\n\n"
+    
+    globals_data = data.get("global_markets", {})
+    if globals_data:
+        text += "🌐 *Küresel Endeksler:*\n"
+        for name, info in globals_data.items():
+            pct = info.get('percentage', 0.0)
+            sign = "+" if pct > 0 else ""
+            text += f"• {name}: {info.get('last')} (%{sign}{pct})\n"
+        text += "\n"
+            
+    sectors = data.get("sector_analysis", [])
+    if sectors:
+        text += "📊 *Sektörel Isı Haritası:*\n"
+        for s in sectors:
+            text += f"• {s.get('name')}: {s.get('trend')} (Skor: {s.get('score')})\n"
+        text += "\n"
+            
+    cal = data.get("economic_calendar", [])
+    if cal:
+        text += "🗓 *Bugünün Ekonomik Takvimi:*\n"
+        for c in cal:
+            text += f"• {c.get('time')} [{c.get('country')}] - {c.get('event')}\n"
+            
+    news = data.get("news", [])
+    if news:
+        text += "\n📰 *Son Haberler:*\n"
+        for n in news[:3]:
+            text += f"• {n.get('time')} - {n.get('title')} ({n.get('source')})\n"
+
+    bot.reply_to(message, text, parse_mode="Markdown")
+
+@bot.message_handler(commands=['hisse'])
+def send_stock_info(message):
+    parts = message.text.split()
+    if len(parts) < 2:
+        bot.reply_to(message, "Lütfen bir hisse kodu girin. Örnek: `/hisse THYAO`", parse_mode="Markdown")
+        return
+        
+    symbol = parts[1].upper()
+    if not symbol.endswith(".IS"):
+        symbol += ".IS"
+        
+    bot.reply_to(message, f"⏳ {symbol} için analiz getiriliyor...")
+    data = fetch_api(f"morning-report?symbol={symbol}")
+    if not data or "outlook" not in data:
+        bot.reply_to(message, "❌ Hisse bulunamadı veya analiz henüz tamamlanmadı.")
+        return
+        
+    outlook = data.get("outlook", {})
+    range_est = data.get("range_estimate", {})
+    
+    text = f"🎯 *{symbol} - DETAYLI ANALİZ*\n\n"
+    text += f"*{outlook.get('title', '')}*\n"
+    text += f"{outlook.get('description', '')}\n\n"
+    
+    text += f"📈 *Destek / Direnç:*\n"
+    text += f"Destek: {range_est.get('support', '')}\n"
+    text += f"Direnç: {range_est.get('resistance', '')}\n"
+    text += f"Trend Beklentisi: {range_est.get('trend', '')}\n"
+    
     bot.reply_to(message, text, parse_mode="Markdown")
 
 def start():
