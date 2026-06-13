@@ -153,8 +153,8 @@ class MarketAnalyzer:
         d = np.ones(len(df))
         
         close = df['close'].values
-        fub = final_upperband.values
-        flb = final_lowerband.values
+        fub = final_upperband.to_numpy(copy=True)
+        flb = final_lowerband.to_numpy(copy=True)
         
         for i in range(1, len(df)):
             if close[i] > fub[i-1]:

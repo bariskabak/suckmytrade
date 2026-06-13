@@ -69,7 +69,7 @@ class BISTClient:
             # Milisaniye cinsinden timestamp sütunu oluştur
             df['timestamp'] = df['datetime'].astype('int64') // 10**6
             df = df[['timestamp', 'open', 'high', 'low', 'close', 'volume', 'datetime']]
-            return df.tail(limit)
+            return df.tail(limit).copy()
         except Exception as e:
             print(f"BIST mum verisi çekilirken hata oluştu ({symbol}): {e}")
             return pd.DataFrame()

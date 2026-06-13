@@ -22,9 +22,9 @@ DEFAULT_ACTIVE_PAIRS = [
     "AKBNK.IS", "ALARK.IS", "ASELS.IS", "ASTOR.IS", "BIMAS.IS", 
     "BRSAN.IS", "ENKAI.IS", "EREGL.IS", "FROTO.IS", "GARAN.IS", 
     "GUBRF.IS", "HEKTS.IS", "ISCTR.IS", "KCHOL.IS", "KONTR.IS", 
-    "KOZAA.IS", "KOZAL.IS", "MGROS.IS", "OYAKC.IS", "PETKM.IS", 
-    "PGSUS.IS", "SAHOL.IS", "SASA.IS", "SISE.IS", "TCELL.IS", 
-    "THYAO.IS", "TOASO.IS", "TUPRS.IS", "YKBNK.IS"
+    "MGROS.IS", "OYAKC.IS", "PETKM.IS", "PGSUS.IS", "SAHOL.IS", 
+    "SASA.IS", "SISE.IS", "TCELL.IS", "THYAO.IS", "TOASO.IS", 
+    "TUPRS.IS", "YKBNK.IS"
 ]
 
 # Küresel Piyasa Göstergeleri (Korelasyon analizi için)
