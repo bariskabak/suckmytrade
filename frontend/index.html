@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIST & Küresel Piyasa Trader Asistanı</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- TradingView Lightweight Charts -->
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="/static/css/style.css?v=20">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-gauge-high brand-icon"></i>
+                <div class="brand-text">
+                    <h1>BIST<span>ASSIST</span></h1>
+                    <p>BIST & Global Market Engine</p>
+                </div>
+            </div>
+
+            <!-- Paper Trading Balance -->
+            <div class="card balance-card">
+                <div class="balance-title">Simüle Bakiye</div>
+                <div class="balance-value" id="paper-balance">100.000,00 TL</div>
+                <div class="balance-sub">Demo Portföyü</div>
+            </div>
+
+            <!-- Timeframe Selector -->
+            <div class="sidebar-section">
+                <h3>ZAMAN DİLİMİ</h3>
+                <div class="timeframe-buttons">
+                    <button class="tf-btn active" data-tf="15m">15d</button>
+                    <button class="tf-btn" data-tf="1h">1sa</button>
+                    <button class="tf-btn" data-tf="1d">1gün</button>
+                </div>
+            </div>
+
+            <!-- Coinflist (Tickers) -->
+            <div class="sidebar-section coin-list-section">
+                <h3>TAKİP EDİLEN HİSSELER</h3>
+                <div class="coin-list" id="coin-list">
+                    <!-- Dynamic coin list items will load here -->
+                    <div class="loading-spinner"><i class="fa-solid fa-circle-notch fa-spin"></i> Yükleniyor...</div>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <button class="btn btn-secondary" id="open-config-btn">
+                    <i class="fa-solid fa-sliders"></i> Takip Listesini Düzenle
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header/Navbar -->
+            <header class="main-header">
+                <div class="active-coin-info">
+                    <h2 id="active-coin-name">THYAO.IS</h2>
+                    <div class="active-price-wrap">
+                        <span class="active-price" id="active-coin-price">-</span>
+                        <span class="change-badge" id="active-coin-change">-</span>
+                    </div>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="alert-toggle-wrap">
+                        <span class="alert-status-text">Sesli Uyarı</span>
+                        <label class="switch">
+                            <input type="checkbox" id="sound-toggle" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="connection-badge status-offline" id="connection-status">
+                        <span class="dot"></span> WEB: BAĞLANTI YOK
+                    </div>
+                    <div class="connection-badge status-offline" id="bist-status-badge">
+                        <span class="dot"></span> BIST: BAĞLANTI YOK
+                    </div>
+                    <div class="connection-badge status-offline" id="session-status-badge">
+                        <span class="dot"></span> SEANS: KAPALI
+                    </div>
+                </div>
+            </header>
+
+            <!-- Navigation Tabs -->
+            <div class="nav-tabs">
+                <button class="nav-tab active" id="tab-dashboard" onclick="switchTab('dashboard')">
+                    <i class="fa-solid fa-chart-line"></i> Canlı İşlem Paneli
+                </button>
+                <button class="nav-tab" id="tab-morning" onclick="switchTab('morning')">
+                    <i class="fa-solid fa-mug-hot"></i> Sabah Analizi & Haberler
+                </button>
+                <button class="nav-tab" id="tab-algo" onclick="switchTab('algo')">
+                    <i class="fa-solid fa-brain"></i> Algoritmik Strateji & Odak
+                </button>
+                <button class="nav-tab" id="tab-simulation" onclick="switchTab('simulation')">
+                    <i class="fa-solid fa-flask"></i> Simülasyon & Backtest
+                </button>
+                <button class="nav-tab" id="tab-paper" onclick="switchTab('paper')">
+                    <i class="fa-solid fa-robot"></i> Canlı Test (Paper Trading)
+                </button>
+            </div>
+
+            <!-- Tab Content: Live Trading Dashboard -->
+            <div class="tab-content active" id="content-dashboard">
+                <!-- Dashboard Grid -->
+                <div class="dashboard-grid">
+                    <!-- Chart Card -->
+                    <div class="card chart-card-container">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-chart-line"></i> Grafik & Mumlar
+                            </div>
+                            <div class="chart-controls">
+                                <span class="chart-tf-label" id="chart-tf-display">15M</span>
+                            </div>
+                        </div>
+                        <div class="chart-body" id="tv-chart">
+                            <!-- Chart will render here -->
+                        </div>
+                    </div>
+
+                    <!-- Analysis Summary Panel -->
+                    <div class="card analysis-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-circle-nodes"></i> Sinyal & Analiz
+                            </div>
+                        </div>
+                        <div class="analysis-body">
+                            <!-- Global Market Sentiment -->
+                            <div class="global-sentiment-section">
+                                <div class="sentiment-header">
+                                    <i class="fa-solid fa-earth-americas"></i> Küresel Piyasa Durumu
+                                </div>
+                                <div class="gss-box" id="gss-box">
+                                    <span class="gss-label">KÜRESEL DUYARLILIK SKORU</span>
+                                    <div class="gss-row">
+                                        <span class="gss-val" id="gss-value">0.00</span>
+                                        <span class="gss-desc" id="gss-desc">NÖTR</span>
+                                    </div>
+                                </div>
+                                <div class="global-indices-grid">
+                                    <div class="global-idx-item">
+                                        <span class="idx-name">NIKKEI 225</span>
+                                        <span class="idx-val" id="idx-nikkei-val">-%</span>
+                                    </div>
+                                    <div class="global-idx-item">
+                                        <span class="idx-name">HANG SENG</span>
+                                        <span class="idx-val" id="idx-hangseng-val">-%</span>
+                                    </div>
+                                    <div class="global-idx-item">
+                                        <span class="idx-name">S&P 500 VAD.</span>
+                                        <span class="idx-val" id="idx-sp500-val">-%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Main Signal State -->
+                            <div class="signal-status-box" id="main-signal-status">
+                                <span class="signal-label">ANLIK SİNYAL</span>
+                                <span class="signal-value" id="signal-badge">YÜKLENİYOR...</span>
+                                <div class="signal-score" id="signal-score-badge">Skor: 0.00</div>
+                            </div>
+
+                            <!-- Technical indicators list -->
+                            <div class="indicator-grid">
+                                <!-- RSI -->
+                                <div class="ind-row">
+                                    <span class="ind-name">RSI (14)</span>
+                                    <div class="ind-progress-container">
+                                        <div class="ind-progress-bar" id="rsi-progress" style="width: 50%;"></div>
+                                    </div>
+                                    <span class="ind-val" id="rsi-value">-</span>
+                                </div>
+
+                                <!-- MACD -->
+                                <div class="ind-row">
+                                    <span class="ind-name">MACD (12, 26)</span>
+                                    <span class="ind-val" id="macd-value">-</span>
+                                </div>
+
+                                <!-- Bollinger Bands -->
+                                <div class="ind-row">
+                                    <span class="ind-name">Bollinger Bandı</span>
+                                    <span class="ind-val" id="bb-value">-</span>
+                                </div>
+
+                                <!-- Moving Averages -->
+                                <div class="ind-row">
+                                    <span class="ind-name">EMA 9 / 21 / 200</span>
+                                    <span class="ind-val" id="ema-value">-</span>
+                                </div>
+                            </div>
+
+                            <!-- Trade Amount Input -->
+                            <div class="trade-amount-section">
+                                <label for="trade-amount-input">İşlem Tutarı (TL)</label>
+                                <div class="amount-input-wrap">
+                                    <input type="number" id="trade-amount-input" value="1000" min="50" max="1000000" step="50" />
+                                    <div class="quick-amounts">
+                                        <button class="quick-amt" data-amt="500">500</button>
+                                        <button class="quick-amt" data-amt="1000">1K</button>
+                                        <button class="quick-amt" data-amt="5000">5K</button>
+                                        <button class="quick-amt" data-amt="10000">10K</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Trade actions (Mock) -->
+                            <div class="trade-actions">
+                                <button class="btn btn-buy" id="btn-mock-buy">
+                                    <i class="fa-solid fa-circle-arrow-up"></i> Sanal AL (Market)
+                                </button>
+                                <button class="btn btn-sell" id="btn-mock-sell">
+                                    <i class="fa-solid fa-circle-arrow-down"></i> Sanal SAT (Market)
+                                </button>
+                            </div>
+
+                            <!-- Açık Pozisyon Bilgisi -->
+                            <div class="position-info" id="position-info" style="display:none;">
+                                <div class="position-header">
+                                    <i class="fa-solid fa-briefcase"></i> Açık Pozisyon
+                                </div>
+                                <div class="position-details">
+                                    <span id="pos-symbol">-</span>
+                                    <span id="pos-qty">0</span>
+                                    <span id="pos-entry">0 TL</span>
+                                    <span id="pos-pnl" class="change-up">0 TL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Signal Log (Full Width) -->
+                    <div class="card log-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-clock-rotate-left"></i> Son Sinyaller Günlüğü
+                            </div>
+                        </div>
+                        <div class="log-body">
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Zaman</th>
+                                            <th>Hisse</th>
+                                            <th>Zaman Dilimi</th>
+                                            <th>Sinyal</th>
+                                            <th>Fiyat</th>
+                                            <th>Detaylar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="signal-log-tbody">
+                                        <!-- Dynamic rows will load here -->
+                                        <tr class="empty-row">
+                                            <td colspan="6">Henüz sinyal üretilmedi. Sinyal döngüsü bekleniyor...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Morning Analysis & News -->
+            <div class="tab-content" id="content-morning" style="display: none;">
+                <div class="morning-grid">
+                    <!-- Left Column: Expectations & Info -->
+                    <div class="morning-left">
+                        <!-- Opening Outlook Card -->
+                        <div class="card morning-card outlook-card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fa-solid fa-sun"></i> Seans Açılış Beklentisi
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="outlook-badge-wrap">
+                                    <div class="outlook-title" id="morning-outlook-title">Yatay Açılış</div>
+                                    <div class="outlook-gss">GSS Skoru: <span id="morning-outlook-gss">0.00</span></div>
+                                </div>
+                                <p class="outlook-description" id="morning-outlook-desc">
+                                    Veriler yükleniyor...
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Intraday Range & Trend Card -->
+                        <div class="card morning-card range-card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fa-solid fa-arrows-left-right"></i> Gün İçi Seans Hareketleri
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="range-metric">
+                                    <div class="range-metric-label" id="morning-range-support-label">BIST 100 Destek Seviyesi</div>
+                                    <div class="range-metric-value" id="morning-range-support">10.220 / 10.150</div>
+                                </div>
+                                <div class="range-metric">
+                                    <div class="range-metric-label" id="morning-range-resistance-label">BIST 100 Direnç Seviyesi</div>
+                                    <div class="range-metric-value" id="morning-range-resistance">10.480 / 10.550</div>
+                                </div>
+                                <div class="range-metric">
+                                    <div class="range-metric-label" id="morning-range-trend-label">Genel Gün İçi Eğilim</div>
+                                    <div class="range-metric-value trend-up" id="morning-range-trend">Yatay-Pozitif</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sektörel Isı Haritası -->
+                        <div class="card morning-card sector-card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fa-solid fa-layer-group"></i> Sektörel Açılış Beklentileri
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="sector-grid" id="morning-sector-analysis">
+                                    <div class="loading-spinner"><i class="fa-solid fa-circle-notch fa-spin"></i> Yükleniyor...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VIOP & Global Markets Card -->
+                        <div class="card morning-card global-markets-card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fa-solid fa-earth-americas"></i> VIOP & Küresel Piyasalar
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="global-indices-grid" id="morning-global-indices">
+                                    <div class="loading-spinner"><i class="fa-solid fa-circle-notch fa-spin"></i> Yükleniyor...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Opening Recommended Purchases -->
+                    <div class="morning-right">
+                        <div class="card morning-card recommendations-card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fa-solid fa-robot"></i> Algoritmik Hisse Tarayıcı (Fırsatlar)
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="recommendations-container" id="morning-recommendations-list">
+                                    <div class="loading-spinner"><i class="fa-solid fa-circle-notch fa-spin"></i> Yükleniyor...</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Economic Calendar Card -->
+                        <div class="card morning-card calendar-card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fa-regular fa-calendar-check"></i> Günün Ekonomik Takvimi
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="calendar-list" id="morning-economic-calendar">
+                                    <div class="loading-spinner"><i class="fa-solid fa-circle-notch fa-spin"></i> Yükleniyor...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Full-Width: Live Financial News Feed -->
+                <div class="card morning-news-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-newspaper"></i> Canlı BIST Gündemi & Haber Akışı
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="news-feed-container" id="morning-news-feed">
+                            <div class="loading-spinner"><i class="fa-solid fa-circle-notch fa-spin"></i> Yükleniyor...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Algorithmic Strategy & Focus -->
+            <div class="tab-content" id="content-algo" style="display: none;">
+                <div class="algo-grid">
+                    <!-- Left Column: Macro & Sentiment Analysis -->
+                    <div class="algo-left">
+                        <!-- Economist Analyst Note Card -->
+                        <div class="card algo-card sentiment-analysis-card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fa-solid fa-file-invoice-dollar"></i> Makro Ekonomik Analiz & Durum
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="sentiment-gss-box">
+                                    <div class="gss-score-wrap">
+                                        <span class="gss-score-label">Küresel Duyarlılık Skoru (GSS)</span>
+                                        <div class="gss-score-badge" id="algo-gss-badge">0.00</div>
+                                    </div>
+                                    <div class="gss-desc-box" id="algo-gss-desc">
+                                        Endeks verileri hesaplanıyor...
+                                    </div>
+                                </div>
+                                <div class="viop-sentiment-box">
+                                    <div class="viop-sentiment-header">
+                                        <span>VIOP & BIST 30 Vadeli Eğilim</span>
+                                        <span id="algo-viop-change" class="trend-flat">0.00%</span>
+                                    </div>
+                                    <p class="viop-desc" id="algo-viop-desc">
+                                        VIOP 30 fiyatı ve seans beklentisi yükleniyor...
+                                    </p>
+                                </div>
+                                <div class="economist-note-box">
+                                    <div class="note-title"><i class="fa-regular fa-lightbulb"></i> Baş Stratejist Notu</div>
+                                    <div class="note-content" id="algo-analyst-note">
+                                        Küresel endeks korelasyonları ve Asya borsaları analiziyle oluşturulan günlük strateji notu hazırlanıyor...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: All Followed Stocks Algorithmic Scorecard -->
+                    <div class="algo-right">
+                        <div class="card algo-card scorecard-card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fa-solid fa-table-list"></i> Takip Listesi Algoritmik Karnesi
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="scorecard-container" id="algo-scorecard-list">
+                                    <div class="loading-spinner"><i class="fa-solid fa-circle-notch fa-spin"></i> Algoritmik veriler hesaplanıyor...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Simulation & Backtest -->
+            <div class="tab-content" id="content-simulation" style="display: none;">
+                <div class="card algo-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-flask"></i> Geçmişe Dönük Simülasyon Testi
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="sim-form">
+                            <div class="sim-form-group">
+                                <label class="sim-label">Hisse/Endeks:</label>
+                                <input type="text" id="sim-symbol" value="XU030.IS" class="sim-input">
+                            </div>
+                            <div class="sim-form-group">
+                                <label class="sim-label">Başlangıç:</label>
+                                <input type="date" id="sim-start" class="sim-input">
+                            </div>
+                            <div class="sim-form-group">
+                                <label class="sim-label">Bitiş:</label>
+                                <input type="date" id="sim-end" class="sim-input">
+                            </div>
+                            <div class="sim-form-group">
+                                <label class="sim-label">Bakiye:</label>
+                                <input type="number" id="sim-balance" value="10000" class="sim-input">
+                            </div>
+                            <div class="sim-form-group">
+                                <label class="sim-label">İşlem Riski (%):</label>
+                                <input type="number" id="sim-risk" value="3" max="100" class="sim-input">
+                            </div>
+                            <button class="btn btn-primary" id="sim-start-btn" onclick="runSimulation()">Testi Başlat</button>
+                        </div>
+
+                        <div id="sim-results" class="sim-results-panel">
+                            <h3 class="sim-results-heading">Test Sonuçları</h3>
+                            <div class="sim-results-grid">
+                                <div class="sim-stat-box">
+                                    <span class="stat-label">Kazanma Oranı</span>
+                                    <strong id="sim-win-rate" class="stat-value">%0</strong>
+                                </div>
+                                <div class="sim-stat-box">
+                                    <span class="stat-label">Kâr Faktörü (PF)</span>
+                                    <strong id="sim-profit-factor" class="stat-value">0.0</strong>
+                                </div>
+                                <div class="sim-stat-box">
+                                    <span class="stat-label">Max Drawdown</span>
+                                    <strong id="sim-max-drawdown" class="stat-value">%0</strong>
+                                </div>
+                                <div class="sim-stat-box">
+                                    <span class="stat-label">Net Kâr</span>
+                                    <strong id="sim-net-profit" class="stat-value">0 TL</strong>
+                                </div>
+                                <div class="sim-stat-box">
+                                    <span class="stat-label">Son Bakiye</span>
+                                    <strong id="sim-final-balance" class="stat-value">0 TL</strong>
+                                </div>
+                            </div>
+                            <h4 class="sim-results-heading">Son İşlemler</h4>
+                            <div class="sim-table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Zaman</th>
+                                            <th>İşlem</th>
+                                            <th>Fiyat</th>
+                                            <th>PnL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="sim-trades-body"></tbody>
+                                </table>
+                            </div>
+
+                            <h4 class="sim-results-heading">Günlük Performans Tablosu</h4>
+                            <div class="sim-table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Tarih</th>
+                                            <th>Günlük PnL</th>
+                                            <th>Toplam Özkaynak</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="sim-daily-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Live Paper Trading -->
+            <div class="tab-content" id="content-paper" style="display: none;">
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2><i class="fa-solid fa-robot"></i> Canlı Kâğıt Üzerinde İşlem (Paper Trading) Motoru</h2>
+                        <div class="panel-actions">
+                            <button class="btn btn-secondary" id="btn-toggle-live" onclick="toggleLiveTrading()">
+                                <i class="fa-solid fa-play"></i> Başlat
+                            </button>
+                        </div>
+                    </div>
+                    <div class="panel-content">
+                        <div class="sim-results-grid">
+                            <div class="sim-stat-box">
+                                <span class="stat-label">Canlı Bakiye</span>
+                                <span class="stat-value" id="live-balance">0.00 TL</span>
+                            </div>
+                            <div class="sim-stat-box">
+                                <span class="stat-label">Toplam Varlık (Equity)</span>
+                                <span class="stat-value" id="live-equity">0.00 TL</span>
+                            </div>
+                            <div class="sim-stat-box">
+                                <span class="stat-label">Açık PnL (Zarar/Kâr)</span>
+                                <span class="stat-value" id="live-pnl">0.00 TL</span>
+                            </div>
+                            <div class="sim-stat-box">
+                                <span class="stat-label">Motor Durumu</span>
+                                <span class="stat-value" id="live-status-text">DURDURULDU</span>
+                            </div>
+                        </div>
+                        
+                        <h3 class="sim-results-heading">Açık Pozisyonlar</h3>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Sembol</th>
+                                        <th>Yön</th>
+                                        <th>Giriş Fiyatı</th>
+                                        <th>Güncel Fiyat</th>
+                                        <th>Kâr/Zarar (TL)</th>
+                                        <th>Kâr/Zarar (%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="live-positions-tbody">
+                                    <tr><td colspan="6" class="text-center text-muted">Aktif pozisyon yok.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h3 class="sim-results-heading">İşlem Kayıtları (Log)</h3>
+                        <div class="console-box" id="live-console-box">
+                            Sistem logları burada görünecektir...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Configuration Modal -->
+    <div class="modal-overlay" id="config-modal">
+        <div class="modal modal-lg">
+            <div class="modal-header">
+                <div class="modal-title-wrap">
+                    <h2><i class="fa-solid fa-list-check"></i> Takip Listesini Düzenle</h2>
+                    <span class="selection-counter" id="selection-counter">0 Seçili</span>
+                </div>
+                <button class="close-btn" id="close-config-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-top-actions">
+                    <div class="search-input-wrap">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" id="pair-search-input" placeholder="Hisse ara (örn: THYAO)...">
+                    </div>
+                    <div class="quick-select-actions">
+                        <button class="btn btn-sm btn-outline" id="btn-select-bist30"><i class="fa-solid fa-bolt"></i> BIST 30</button>
+                        <button class="btn btn-sm btn-outline" id="btn-select-all"><i class="fa-solid fa-check-double"></i> Tümünü Seç</button>
+                        <button class="btn btn-sm btn-outline-danger" id="btn-clear-all"><i class="fa-solid fa-trash-can"></i> Temizle</button>
+                    </div>
+                </div>
+                <div class="pair-checkbox-grid" id="pair-checkbox-container">
+                    <!-- Checkboxes will load dynamically -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-config-btn">Vazgeç</button>
+                <button class="btn btn-primary" id="save-config-btn"><i class="fa-solid fa-check"></i> Kaydet & Uygula</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Bildirimleri -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Custom Scripts -->
+    <script src="/static/js/charts.js?v=20"></script>
+    <script src="/static/js/app.js?v=20"></script>
+</body>
+</html>

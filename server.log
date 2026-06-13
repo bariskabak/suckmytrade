@@ -1,0 +1,1183 @@
+/Users/bariskabak/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:     Started server process [2243]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+📦 Gerekli Python kütüphaneleri kontrol ediliyor...
+✅ Tüm bağımlılıklar zaten yüklü.
+🔄 Port 8000 kontrol ediliyor...
+⚠️  Port 8000 meşgul. PID'ler sonlandırılıyor: 989, 1014
+✅ Port 8000 serbest bırakıldı.
+🌐 BIST veri bağlantısı test ediliyor (Yahoo Finance)...
+✅ BIST Bağlantısı Başarılı! THYAO.IS: 296.75 TL
+
+=======================================================
+  🚀 BIST VE KÜRESEL PİYASA TRADER ASISTANI BAŞLATILIYOR
+=======================================================
+  📊 Web Arayüzü: http://127.0.0.1:8000
+  📊 Alternatif:  http://localhost:8000
+  🛑 Kapatmak için: Ctrl + C
+=======================================================
+
+🚀 FastAPI sunucusu başlatıldı.
+✅ Market analiz döngüsü başlatıldı...
+INFO:     127.0.0.1:53675 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53675 - "GET /static/css/style.css?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53676 - "GET /static/js/charts.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53677 - "GET /static/js/app.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53680 - "WebSocket /ws" [accepted]
+INFO:     connection open
+🔌 WebSocket bağlantısı açıldı (1 aktif)
+INFO:     127.0.0.1:53677 - "GET /api/live-trading/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53677 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53681 - "GET /api/candles/THYAO.IS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53675 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53676 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.97
+INFO:     127.0.0.1:53676 - "GET / HTTP/1.1" 200 OK
+INFO:     connection closed
+🔌 WebSocket bağlantısı kapandı (0 aktif)
+INFO:     127.0.0.1:53681 - "GET /static/js/app.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53676 - "GET /static/css/style.css?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53675 - "GET /static/js/charts.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53697 - "WebSocket /ws" [accepted]
+INFO:     connection open
+🔌 WebSocket bağlantısı açıldı (1 aktif)
+INFO:     127.0.0.1:53681 - "GET /api/live-trading/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53681 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:53677 - "GET /api/candles/THYAO.IS HTTP/1.1" 200 OK
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: KOZAA.IS"}}}
+INFO:     127.0.0.1:53675 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53676 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: KOZAL.IS"}}}
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+✅ BIST verileri alındı — 27 hisse güncellendi
+  📡 AKBNK.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 ALARK.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 ASELS.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 ASTOR.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 BIMAS.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 BRSAN.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 ENKAI.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 EREGL.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 FROTO.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 GARAN.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 GUBRF.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 HEKTS.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 ISCTR.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 KCHOL.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 KONTR.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+  📡 MGROS.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 OYAKC.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 PETKM.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 PGSUS.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 SAHOL.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 SASA.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 SISE.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 TCELL.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 THYAO.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 TOASO.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 TUPRS.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+  📡 YKBNK.IS: Akıllı Sinyal = NOTR (Skor: 0.0)
+[LIVE TRADER] Canlı Test Modu Başlatıldı.
+INFO:     127.0.0.1:53728 - "POST /api/live-trading/toggle HTTP/1.1" 200 OK
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.97
+✅ BIST verileri alındı — 27 hisse güncellendi
+INFO:     127.0.0.1:53760 - "GET /api/morning-report?symbol=ASTOR.IS HTTP/1.1" 200 OK
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+INFO:     127.0.0.1:53760 - "GET /api/morning-report HTTP/1.1" 200 OK
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.95
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.95
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.94
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.91
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+INFO:     127.0.0.1:54125 - "GET / HTTP/1.1" 200 OK
+INFO:     connection closed
+🔌 WebSocket bağlantısı kapandı (0 aktif)
+INFO:     127.0.0.1:54126 - "GET /static/js/charts.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54125 - "GET /static/css/style.css?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54127 - "GET /static/js/app.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54128 - "WebSocket /ws" [accepted]
+INFO:     connection open
+🔌 WebSocket bağlantısı açıldı (1 aktif)
+INFO:     127.0.0.1:54127 - "GET /api/live-trading/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54127 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:54125 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54130 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+INFO:     127.0.0.1:54165 - "GET /api/morning-report?symbol=SAHOL.IS HTTP/1.1" 200 OK
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     connection closed
+INFO:     127.0.0.1:54316 - "WebSocket /ws" [accepted]
+INFO:     connection open
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.94
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.94
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.94
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔌 WebSocket bağlantısı kapandı (0 aktif)
+🔌 WebSocket bağlantısı açıldı (1 aktif)
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.97
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.97
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.97
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.95
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.94
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.95
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.94
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.95
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.95
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.95
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.94
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.92
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.92
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.92
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.94
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.94
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.97
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.98
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.99
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.99
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.98
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.98
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.99
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 2.02
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 2.0
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.99
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.99
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+INFO:     127.0.0.1:55984 - "GET / HTTP/1.1" 200 OK
+INFO:     connection closed
+🔌 WebSocket bağlantısı kapandı (0 aktif)
+INFO:     127.0.0.1:55984 - "GET /static/css/style.css?v=10 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55985 - "GET /static/js/app.js?v=10 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:55986 - "WebSocket /ws" [accepted]
+INFO:     connection open
+🔌 WebSocket bağlantısı açıldı (1 aktif)
+INFO:     127.0.0.1:55985 - "GET /api/live-trading/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55984 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     connection closed
+INFO:     127.0.0.1:56427 - "WebSocket /ws" [accepted]
+INFO:     connection open
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     connection closed
+INFO:     127.0.0.1:56627 - "WebSocket /ws" [accepted]
+INFO:     connection open
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 2.0
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.99
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 2.0
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 2.01
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 2.01
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 2.01
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 2.01
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 2.01
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 2.0
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.99
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.98
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.98
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔌 WebSocket bağlantısı kapandı (0 aktif)
+🔌 WebSocket bağlantısı açıldı (1 aktif)
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.95
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.95
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+🔌 WebSocket bağlantısı kapandı (0 aktif)
+🔌 WebSocket bağlantısı açıldı (1 aktif)
+BIST mum verisi çekilirken hata oluştu (KOZAA.IS): 'NoneType' object is not subscriptable
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+BIST mum verisi çekilirken hata oluştu (PETKM.IS): 'NoneType' object is not subscriptable
+  ⚠️  PETKM.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.95
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.97
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.95
+✅ BIST verileri alındı — 27 hisse güncellendi
+INFO:     127.0.0.1:56827 - "GET / HTTP/1.1" 200 OK
+INFO:     connection closed
+🔌 WebSocket bağlantısı kapandı (0 aktif)
+INFO:     127.0.0.1:56827 - "GET /static/css/style.css?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56828 - "GET /static/js/charts.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56829 - "GET /static/js/app.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56831 - "WebSocket /ws" [accepted]
+INFO:     connection open
+🔌 WebSocket bağlantısı açıldı (1 aktif)
+INFO:     127.0.0.1:56829 - "GET /api/live-trading/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56829 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+INFO:     127.0.0.1:56828 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+INFO:     127.0.0.1:56828 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56835 - "GET /api/morning-report HTTP/1.1" 200 OK
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.97
+INFO:     127.0.0.1:56835 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     127.0.0.1:56837 - "GET /api/morning-report HTTP/1.1" 200 OK
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+INFO:     127.0.0.1:56876 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56876 - "GET /api/morning-report HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56876 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.95
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.95
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.96
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+INFO:     127.0.0.1:57068 - "GET / HTTP/1.1" 200 OK
+INFO:     connection closed
+🔌 WebSocket bağlantısı kapandı (0 aktif)
+INFO:     127.0.0.1:57069 - "GET /static/js/app.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57068 - "GET /static/css/style.css?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57070 - "GET /static/js/charts.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57071 - "WebSocket /ws" [accepted]
+INFO:     connection open
+🔌 WebSocket bağlantısı açıldı (1 aktif)
+INFO:     127.0.0.1:57069 - "GET /api/live-trading/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57069 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57068 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+INFO:     127.0.0.1:57068 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+INFO:     127.0.0.1:57188 - "GET /api/morning-report HTTP/1.1" 200 OK
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.92
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+INFO:     127.0.0.1:57225 - "GET / HTTP/1.1" 200 OK
+INFO:     connection closed
+🔌 WebSocket bağlantısı kapandı (0 aktif)
+INFO:     127.0.0.1:57226 - "GET /static/js/charts.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57225 - "GET /static/css/style.css?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57227 - "GET /static/js/app.js?v=10 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57228 - "WebSocket /ws" [accepted]
+INFO:     connection open
+🔌 WebSocket bağlantısı açıldı (1 aktif)
+INFO:     127.0.0.1:57227 - "GET /api/live-trading/status HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57227 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:57226 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+🔄 Analiz döngüsü çalışıyor... BIST Seansı: Açık | GSS: 1.93
+✅ BIST verileri alındı — 27 hisse güncellendi
+  ⚠️  KOZAA.IS: Mum verisi boş döndü
+  ⚠️  KOZAL.IS: Mum verisi boş döndü
+INFO:     127.0.0.1:57276 - "GET /api/morning-report?symbol=THYAO.IS HTTP/1.1" 200 OK
+$KOZAA.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+
+2 Failed downloads:
+['KOZAA.IS', 'KOZAL.IS']: possibly delisted; no price data found  (period=5d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAA.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+$KOZAL.IS: possibly delisted; no price data found  (period=60d) (Yahoo error = "No data found, symbol may be delisted")
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2243]
