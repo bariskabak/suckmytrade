@@ -90,9 +90,6 @@ def main():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(current_dir)
     
-    # Gereksinimleri yükle
-    install_requirements()
-    
     # .env dosyasını yükle (Lokal testler için)
     try:
         from dotenv import load_dotenv
