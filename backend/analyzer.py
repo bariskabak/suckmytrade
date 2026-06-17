@@ -546,6 +546,10 @@ class MarketAnalyzer:
         if len(df) < 20:
             return {"score": 0, "details": []}
             
+        # Eğer henüz hacim SMA hesaplanmamışsa
+        if 'Vol_SMA' not in df.columns:
+            df['Vol_SMA'] = cls.calculate_volume_sma(df, 20)
+            
         latest = df.iloc[-1]
         
         close_p = cls._safe_float(latest['close'])
@@ -554,9 +558,6 @@ class MarketAnalyzer:
         open_p = cls._safe_float(latest['open'])
         vol = cls._safe_float(latest['volume'])
         
-        # Eğer henüz hacim SMA hesaplanmamışsa
-        if 'Vol_SMA' not in df.columns:
-            df['Vol_SMA'] = cls.calculate_volume_sma(df, 20)
         vol_sma = cls._safe_float(latest.get('Vol_SMA', 1.0))
         vol_ratio = vol / vol_sma if vol_sma > 0 else 1.0
         

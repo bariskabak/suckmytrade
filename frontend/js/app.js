@@ -1696,13 +1696,26 @@ async function fetchGapHunter() {
         
         if (data.status === 'success') {
             if (data.candidates && data.candidates.length > 0) {
-                container.innerHTML = data.candidates.map(c => `
+                container.innerHTML = data.candidates.map(c => {
+                    let scoreDesc = "";
+                    if (c.score >= 80) {
+                        scoreDesc = "<span style='color:#10b981; font-weight:bold;'><i class='fa-solid fa-fire'></i> ALIM BÖLGESİ (Tavan Adayı)</span> - Ertesi gün gap-up yapma ihtimali çok yüksek.";
+                    } else if (c.score >= 50) {
+                        scoreDesc = "<span style='color:#f59e0b;'><i class='fa-solid fa-eye'></i> Yakın Takip (Potansiyel Var)</span> - İzlemeye değer ancak tam onay almamış.";
+                    } else {
+                        scoreDesc = "<span style='color:#ef4444;'><i class='fa-solid fa-ban'></i> ALINMAZ (Zayıf Kapanış)</span> - Sadece listeyi görmeniz için eklenmiştir.";
+                    }
+                    
+                    return `
                     <div class="signal-card" style="border-left: 4px solid #FFD700; background: rgba(255, 215, 0, 0.05);">
                         <div class="sig-header">
                             <span class="sig-symbol">${c.symbol}</span>
                             <span class="sig-badge" style="background: rgba(255, 215, 0, 0.2); color: #FFD700; font-weight: bold;">SKOR: ${c.score} / 100</span>
                         </div>
                         <div class="sig-body">
+                            <div class="sig-detail" style="margin-bottom: 10px; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;">
+                                ${scoreDesc}
+                            </div>
                             <div class="sig-detail"><span>Günün Zirvesine Yakınlık:</span> <strong>%${(c.close_ratio * 100).toFixed(1)}</strong></div>
                             <div class="sig-detail"><span>Hacim İvmesi:</span> <strong>${c.vol_ratio.toFixed(1)}x Ort.</strong></div>
                             <div class="sig-detail"><span>Günlük Değişim:</span> <strong>%${c.pct_change.toFixed(2)}</strong></div>
@@ -1711,12 +1724,12 @@ async function fetchGapHunter() {
                             </div>
                         </div>
                         <div class="sig-footer">
-                            <button class="btn btn-sm" onclick="setActiveSymbol('${c.symbol}.IS'); switchTab('dashboard');" style="width: 100%; border: 1px solid #FFD700; color: #FFD700; background: transparent;">
+                            <button class="btn btn-sm" onclick="selectActiveCoin('${c.symbol}.IS'); switchTab('dashboard');" style="width: 100%; border: 1px solid #FFD700; color: #FFD700; background: transparent;">
                                 Grafikte İncele
                             </button>
                         </div>
                     </div>
-                `).join('');
+                `}).join('');
             } else {
                 container.innerHTML = '<div class="text-center text-muted" style="padding: 30px;">Şu an için kriterlere uyan (Tavan/Gap potansiyeli yüksek) hisse bulunamadı. Lütfen kapanışa (17:50) daha yakın bir saatte tekrar deneyin.</div>';
             }
