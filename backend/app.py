@@ -17,6 +17,14 @@ from backend.live_trader import LiveTrader
 from backend import config
 import math
 
+# Telegram bildirim fonksiyonu
+def send_telegram_notification(text):
+    try:
+        from backend.telegram_bot import send_notification
+        send_notification(text)
+    except Exception as e:
+        print(f"Telegram bildirim hatası: {e}")
+
 def safe_float(val, default=0.0):
     if val is None: return default
     try:
@@ -207,6 +215,8 @@ async def market_analysis_loop():
                             "price": analysis["price"],
                             "signal": analysis["signal"],
                             "score": analysis["score"],
+                            "confidence": analysis.get("confidence", 0),
+                            "signal_mode": analysis.get("signal_mode", "MEAN_REVERSION"),
                             "details": analysis["details"],
                             "timeframe": current_timeframe
                         }
@@ -218,7 +228,20 @@ async def market_analysis_loop():
                             "type": "new_signal",
                             "data": signal_event
                         })
-                        print(f"  📡 {symbol}: Akıllı Sinyal = {analysis['signal']} (Skor: {analysis['score']})")
+                        print(f"  📡 {symbol}: Akıllı Sinyal = {analysis['signal']} (Skor: {analysis['score']}, Güven: %{analysis.get('confidence', 0)})")
+                        
+                        # Güçlü sinyallerde otomatik Telegram bildirimi
+                        if analysis["signal"] in ["GUCLU_AL", "GUCLU_SAT"]:
+                            emoji = "🟢" if "AL" in analysis["signal"] else "🔴"
+                            notif_text = (
+                                f"{emoji} GÜÇLÜ SİNYAL: {symbol.split('.')[0]}\n"
+                                f"Sinyal: {analysis['signal']}\n"
+                                f"Fiyat: {analysis['price']}\n"
+                                f"Skor: {analysis['score']} | Güven: %{analysis.get('confidence', 0)}\n"
+                                f"Strateji: {analysis.get('signal_mode', '')}\n"
+                                f"Detay: {', '.join(analysis.get('details', [])[:2])}"
+                            )
+                            send_telegram_notification(notif_text)
                     
                     last_analysis_results[symbol] = analysis
                     
@@ -292,11 +315,100 @@ async def live_ticker_loop():
         except Exception as e:
             pass
 
+async def gap_hunter_loop():
+    """Saat 17:50'de Kapanış-Açılış (Gap) Stratejisi analizi yapar ve Telegram bildirimi gönderir."""
+    last_run_date = None
+    while True:
+        await asyncio.sleep(60)
+        try:
+            trt_now = get_trt_time()
+            current_date = trt_now.date()
+            
+            # Sadece hafta içi
+            if trt_now.weekday() >= 5:
+                continue
+                
+            # Saat 17:50 ile 17:55 arası kontrol et
+            if trt_now.hour == 17 and trt_now.minute == 50:
+                if last_run_date != current_date:
+                    print("🔍 Kapanış-Açılış (Gap) Stratejisi: Sistem Taraması Başladı...")
+                    last_run_date = current_date
+                    
+                    gap_candidates = []
+                    # Sadece BIST30/100 gibi güçlü ve hacimli hisseleri tarıyoruz (active_pairs)
+                    for symbol in active_pairs:
+                        try:
+                            # 1 günlük mum verisi al (Son 20 günü alıyoruz ki SMA hacim hesaplansın)
+                            df = await asyncio.to_thread(bist_client.fetch_candles, symbol, period="30d", timeframe="1d")
+                            if df.empty or len(df) < 20:
+                                continue
+                                
+                            gap_data = MarketAnalyzer.calculate_gap_potential(df)
+                            if gap_data["score"] >= 80:
+                                gap_candidates.append({
+                                    "symbol": symbol.replace(".IS", ""),
+                                    "score": gap_data["score"],
+                                    "details": gap_data["details"],
+                                    "close_ratio": gap_data["close_ratio"]
+                                })
+                        except Exception as e:
+                            pass
+                            
+                    # Eğer iyi adaylar varsa telegramdan gönder
+                    if gap_candidates:
+                        # Skora göre sırala
+                        gap_candidates.sort(key=lambda x: x["score"], reverse=True)
+                        
+                        text = "🔔 KAPANIŞ / GAP STRATEJİSİ FIRSATLARI 🔔\n\n"
+                        text += "Ertesi gün açılışta tavan veya gap-up yapma potansiyeli yüksek hisseler:\n\n"
+                        
+                        for c in gap_candidates[:5]:
+                            text += f"🚀 *{c['symbol']}* (Skor: {c['score']})\n"
+                            text += f"• {', '.join(c['details'][:2])}\n\n"
+                            
+                        text += "💡 Not: 18:00 kapanışına kadar kademeli alım yapılabilir."
+                        send_telegram_notification(text)
+        except Exception as e:
+            print(f"Gap Hunter hatası: {e}")
+
 @app.on_event("startup")
 async def startup_event():
     print("🚀 FastAPI sunucusu başlatıldı.")
     asyncio.create_task(market_analysis_loop())
     asyncio.create_task(live_ticker_loop())
+    asyncio.create_task(gap_hunter_loop())
+
+# REST API Uç Noktaları
+
+@app.get("/api/gap-hunter")
+async def get_gap_hunter_results():
+    """İstenilen anda o günkü Gap potansiyellerini hesaplar ve UI'a döner."""
+    gap_candidates = []
+    
+    # Paralel çekim yapılabilir ama basitlik için sıralı (BIST verisini zorlamamak adına)
+    for symbol in active_pairs:
+        try:
+            df = await asyncio.to_thread(bist_client.fetch_candles, symbol, period="30d", timeframe="1d")
+            if df.empty or len(df) < 20:
+                continue
+                
+            gap_data = MarketAnalyzer.calculate_gap_potential(df)
+            
+            # Tüm hesaplananları ekleyelim (UI'da en iyileri göstermek için)
+            gap_candidates.append({
+                "symbol": symbol.replace(".IS", ""),
+                "score": gap_data["score"],
+                "details": gap_data["details"],
+                "close_ratio": gap_data["close_ratio"],
+                "vol_ratio": gap_data["vol_ratio"],
+                "pct_change": gap_data["pct_change"]
+            })
+        except Exception:
+            pass
+            
+    # Skora göre sırala ve en yüksek 10 tanesini UI'a gönder
+    gap_candidates.sort(key=lambda x: x["score"], reverse=True)
+    return {"status": "success", "candidates": gap_candidates[:12]}
 
 # REST API Uç Noktaları
 
@@ -667,6 +779,24 @@ async def get_morning_report(symbol: str = None):
             "color": color
         })
 
+    # Dinamik Destek/Direnç hesaplama (BIST 30 / XU030 verisiyle)
+    def _calculate_dynamic_sr(level_type):
+        try:
+            xu030_data = global_indices_data.get("VIOP_30", {})
+            xu030_last = xu030_data.get("last")
+            if xu030_last and xu030_last > 0:
+                if level_type == "support":
+                    s1 = round(xu030_last * 0.985, 0)
+                    s2 = round(xu030_last * 0.975, 0)
+                    return f"{int(s1)} / {int(s2)}"
+                else:
+                    r1 = round(xu030_last * 1.015, 0)
+                    r2 = round(xu030_last * 1.025, 0)
+                    return f"{int(r1)} / {int(r2)}"
+        except:
+            pass
+        return "Hesaplanamadı"
+
     # 5. Ekonomik Takvim (Mock / Curated for today)
     import datetime
     economic_calendar = [
@@ -684,8 +814,8 @@ async def get_morning_report(symbol: str = None):
             "gss": round(gss_value, 2)
         },
         "range_estimate": {
-            "support": "10.220 / 10.150",
-            "resistance": "10.480 / 10.550",
+            "support": _calculate_dynamic_sr("support"),
+            "resistance": _calculate_dynamic_sr("resistance"),
             "trend": "Yatay-Pozitif" if gss_value >= 0 else "Yatay-Negatif"
         },
         "global_markets": global_indices_data,

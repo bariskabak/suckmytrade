@@ -1674,3 +1674,62 @@ function renderLiveTrading(data) {
         }
     }
 }
+
+// ═══════════════════════════════════════════════
+// GAP HUNTER
+// ═══════════════════════════════════════════════
+
+async function fetchGapHunter() {
+    const container = document.getElementById('gap-hunter-results');
+    const btn = document.getElementById('btn-refresh-gap');
+    
+    if (!container || !btn) return;
+    
+    // UI Update
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Taranıyor...';
+    container.innerHTML = '<div class="loading-spinner"><i class="fa-solid fa-circle-notch fa-spin"></i> Piyasa verileri analiz ediliyor, lütfen bekleyin...</div>';
+    
+    try {
+        const response = await fetch(`${API_BASE}/api/gap-hunter`);
+        const data = await response.json();
+        
+        if (data.status === 'success') {
+            if (data.candidates && data.candidates.length > 0) {
+                container.innerHTML = data.candidates.map(c => `
+                    <div class="signal-card" style="border-left: 4px solid #FFD700; background: rgba(255, 215, 0, 0.05);">
+                        <div class="sig-header">
+                            <span class="sig-symbol">${c.symbol}</span>
+                            <span class="sig-badge" style="background: rgba(255, 215, 0, 0.2); color: #FFD700; font-weight: bold;">SKOR: ${c.score}</span>
+                        </div>
+                        <div class="sig-body">
+                            <div class="sig-detail"><span>Günün Zirvesine Yakınlık:</span> <strong>%${(c.close_ratio * 100).toFixed(1)}</strong></div>
+                            <div class="sig-detail"><span>Hacim İvmesi:</span> <strong>${c.vol_ratio.toFixed(1)}x Ort.</strong></div>
+                            <div class="sig-detail"><span>Günlük Değişim:</span> <strong>%${c.pct_change.toFixed(2)}</strong></div>
+                            <div class="sig-detail" style="margin-top: 10px; font-size: 0.85rem; color: #a1a1aa;">
+                                ${c.details.map(d => `<i class="fa-solid fa-check"></i> ${d}`).join('<br>')}
+                            </div>
+                        </div>
+                        <div class="sig-footer">
+                            <button class="btn btn-sm" onclick="setActiveSymbol('${c.symbol}.IS'); switchTab('dashboard');" style="width: 100%; border: 1px solid #FFD700; color: #FFD700; background: transparent;">
+                                Grafikte İncele
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                container.innerHTML = '<div class="text-center text-muted" style="padding: 30px;">Şu an için kriterlere uyan (Tavan/Gap potansiyeli yüksek) hisse bulunamadı. Lütfen kapanışa (17:50) daha yakın bir saatte tekrar deneyin.</div>';
+            }
+        } else {
+            throw new Error("Veri çekilemedi");
+        }
+    } catch (error) {
+        console.error("Gap Hunter error:", error);
+        container.innerHTML = `<div class="text-center" style="color: #ef4444; padding: 20px;">
+            <i class="fa-solid fa-triangle-exclamation"></i> Veriler alınırken bir hata oluştu.
+        </div>`;
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> Şimdi Tara';
+    }
+}

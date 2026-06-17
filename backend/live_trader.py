@@ -24,6 +24,9 @@ class LiveTrader:
         self.trades = []
         self.logs = []
         
+        # Cooldown tracking per symbol (after stop-loss)
+        self.cooldown_until = {}
+        
     def start(self):
         self.is_active = True
         self.log("Canlı Test Modu Başlatıldı.")
@@ -64,7 +67,8 @@ class LiveTrader:
             "recent_logs": self.logs
         }
 
-    def process_tick(self, symbol: str, current_price: float, high: float, low: float, analysis: Dict[str, Any]):
+    def process_tick(self, symbol: str, current_price: float, high: float, low: float, analysis: Dict[str, Any],
+                     signal_strength: str = None, signal_mode: str = None):
         if not self.is_active:
             return
             
@@ -91,17 +95,35 @@ class LiveTrader:
         if now.hour == 9 or (now.hour == 10 and now.minute <= 15):
             return # Skip amateur hour
             
+        # Cooldown check — skip entry if symbol is in cooldown after a stop-loss
+        now_ts = time.time()
+        if symbol in self.cooldown_until:
+            if now_ts < self.cooldown_until[symbol]:
+                return  # Still in cooldown
+            else:
+                del self.cooldown_until[symbol]
+            
         # Look for Entry
         signal = analysis.get('signal', 'NOTR')
         score = analysis.get('score', 0.0)
         atr = analysis.get('indicators', {}).get('volatility', {}).get('atr', 0)
         
+        # Determine signal strength from signal name if not explicitly passed
+        if signal_strength is None:
+            if signal in ["GUCLU_AL", "GUCLU_SAT"]:
+                signal_strength = "GUCLU"
+            else:
+                signal_strength = "NORMAL"
+        
         if signal in ["GUCLU_AL", "AL"]:
-            self._open_position(symbol, 'LONG', current_price, atr)
+            self._open_position(symbol, 'LONG', current_price, atr,
+                                signal_strength=signal_strength, signal_mode=signal_mode)
         elif signal in ["GUCLU_SAT", "SAT"]:
-            self._open_position(symbol, 'SHORT', current_price, atr)
+            self._open_position(symbol, 'SHORT', current_price, atr,
+                                signal_strength=signal_strength, signal_mode=signal_mode)
             
-    def _open_position(self, symbol: str, side: str, price: float, atr: float):
+    def _open_position(self, symbol: str, side: str, price: float, atr: float,
+                       signal_strength: str = "NORMAL", signal_mode: str = None):
         if atr > 0:
             stop_dist = atr * 2.0
             tp_dist = atr * 2.5
@@ -109,7 +131,13 @@ class LiveTrader:
             stop_dist = price * 0.01
             tp_dist = price * 0.015
             
-        max_loss = self.balance * self.risk_per_trade
+        # Signal-based position sizing
+        if signal_strength == "GUCLU":
+            effective_risk = self.risk_per_trade * 1.5
+        else:
+            effective_risk = self.risk_per_trade * 1.0
+            
+        max_loss = self.balance * effective_risk
         raw_size = max_loss / stop_dist
         notional = raw_size * price
         
@@ -152,12 +180,17 @@ class LiveTrader:
             "tp": tp_price,
             "partial_tp": partial_tp,
             "partial_done": False,
+            "trailing_active": False,
             "pnl": -fee,
             "pnl_percent": 0.0,
-            "open_time": datetime.now()
+            "open_time": datetime.now(),
+            "atr": atr,
+            "signal_strength": signal_strength,
+            "signal_mode": signal_mode
         }
         
-        self.log(f"🟢 YENİ POZİSYON: {symbol} {side} @ {round(price, 2)} (SL: {round(sl_price,2)}, TP: {round(tp_price,2)})")
+        strength_tag = " [GÜÇLÜ]" if signal_strength == "GUCLU" else ""
+        self.log(f"🟢 YENİ POZİSYON: {symbol} {side}{strength_tag} @ {round(price, 2)} (SL: {round(sl_price,2)}, TP: {round(tp_price,2)})")
         
     def _update_position(self, symbol: str, current_price: float, high: float, low: float):
         pos = self.positions[symbol]
@@ -166,6 +199,19 @@ class LiveTrader:
         side = pos["side"]
         entry = pos["entry_price"]
         size = pos["size"]
+        atr = pos.get("atr", 0)
+        
+        # --- Time-Based Exit: close if open > 3 days and PnL < 0 ---
+        elapsed = (datetime.now() - pos["open_time"]).total_seconds()
+        if elapsed > 259200:  # 3 days
+            if side == 'LONG':
+                current_pnl = (current_price - entry) * size
+            else:
+                current_pnl = (entry - current_price) * size
+            if current_pnl < 0:
+                self.log(f"⏰ {symbol} Zaman Aşımı Çıkışı: {elapsed/3600:.1f} saat açık, PnL negatif.")
+                self._close_position(symbol, current_price, "TIME_EXIT")
+                return
         
         if side == 'LONG':
             pnl = (current_price - entry) * size
@@ -178,6 +224,19 @@ class LiveTrader:
                     pos["sl"] = entry + buffer
                 pos["partial_done"] = True
                 self.log(f"🛡️ {symbol} Risk Sıfırlandı (Stop Maliyete Çekildi)")
+                
+            # Trailing Stop (activates after partial_done)
+            if pos["partial_done"] and atr > 0:
+                trailing_activation = entry + (atr * 2.0)
+                trailing_distance = atr * 1.0
+                if high >= trailing_activation:
+                    if not pos["trailing_active"]:
+                        pos["trailing_active"] = True
+                        self.log(f"📈 {symbol} Trailing Stop Aktif (Aktivasyon: {round(trailing_activation, 2)})")
+                if pos["trailing_active"]:
+                    new_trail_sl = high - trailing_distance
+                    if new_trail_sl > pos["sl"]:
+                        pos["sl"] = new_trail_sl
                 
             # TP Hit
             if high >= pos["tp"]:
@@ -200,6 +259,19 @@ class LiveTrader:
                     pos["sl"] = entry - buffer
                 pos["partial_done"] = True
                 self.log(f"🛡️ {symbol} Risk Sıfırlandı (Stop Maliyete Çekildi)")
+                
+            # Trailing Stop (activates after partial_done)
+            if pos["partial_done"] and atr > 0:
+                trailing_activation = entry - (atr * 2.0)
+                trailing_distance = atr * 1.0
+                if low <= trailing_activation:
+                    if not pos["trailing_active"]:
+                        pos["trailing_active"] = True
+                        self.log(f"📉 {symbol} Trailing Stop Aktif (Aktivasyon: {round(trailing_activation, 2)})")
+                if pos["trailing_active"]:
+                    new_trail_sl = low + trailing_distance
+                    if new_trail_sl < pos["sl"]:
+                        pos["sl"] = new_trail_sl
                 
             # TP Hit
             if low <= pos["tp"]:
@@ -232,6 +304,12 @@ class LiveTrader:
         
         icon = "💰" if net_pnl > 0 else "🩸"
         self.log(f"{icon} POZİSYON KAPANDI: {symbol} ({reason}) PnL: {round(net_pnl, 2)} TL")
+        
+        # Cooldown after stop-loss: block this symbol for 1 hour
+        if reason == "STOP_LOSS":
+            cooldown_seconds = 3600
+            self.cooldown_until[symbol] = time.time() + cooldown_seconds
+            self.log(f"🕐 {symbol} Cooldown başladı ({cooldown_seconds // 60} dakika)")
         
         self.trades.append({
             "symbol": symbol,

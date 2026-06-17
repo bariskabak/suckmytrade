@@ -100,6 +100,9 @@
                 <button class="nav-tab" id="tab-morning" onclick="switchTab('morning')">
                     <i class="fa-solid fa-mug-hot"></i> Sabah Analizi & Haberler
                 </button>
+                <button class="nav-tab" id="tab-gap" onclick="switchTab('gap')">
+                    <i class="fa-solid fa-bolt"></i> Kapanış/Gap Stratejisi
+                </button>
                 <button class="nav-tab" id="tab-algo" onclick="switchTab('algo')">
                     <i class="fa-solid fa-brain"></i> Algoritmik Strateji & Odak
                 </button>
@@ -391,6 +394,29 @@
                     <div class="card-body">
                         <div class="news-feed-container" id="morning-news-feed">
                             <div class="loading-spinner"><i class="fa-solid fa-circle-notch fa-spin"></i> Yükleniyor...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Gap Hunter -->
+            <div class="tab-content" id="content-gap" style="display: none;">
+                <div class="card algo-card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-bolt" style="color: #FFD700;"></i> Kapanış-Açılış (Gap & Tavan) Avcısı
+                        </div>
+                        <button class="btn btn-secondary" onclick="fetchGapHunter()" id="btn-refresh-gap">
+                            <i class="fa-solid fa-rotate-right"></i> Şimdi Tara
+                        </button>
+                    </div>
+                    <div class="algo-body">
+                        <div class="algo-desc" style="margin-bottom: 20px;">
+                            <p>Bu strateji <strong>saat 17:50 - 17:55</strong> arasında çalıştırılmalıdır. Fiyatın günün en yükseğine yakınlığı, hacim ivmesi ve Momentum gibi göstergelere bakarak ertesi sabah <strong>"Tavan"</strong> veya <strong>"Gap-up (Boşluklu Yükseliş)"</strong> yapma ihtimali en yüksek olan hisseleri listeler. Saat 17:50'de otomatik Telegram bildirimi atar.</p>
+                        </div>
+                        
+                        <div id="gap-hunter-results" class="signals-grid">
+                            <div class="loading-spinner"><i class="fa-solid fa-circle-notch fa-spin"></i> Taramak için 'Şimdi Tara' butonuna basın...</div>
                         </div>
                     </div>
                 </div>

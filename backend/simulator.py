@@ -158,14 +158,17 @@ class BacktestSimulator:
             indicators = analysis.get('indicators', {})
             atr = indicators.get('volatility', {}).get('atr', 0)
             
+            # Signal mode (TREND_FOLLOWING veya MEAN_REVERSION)
+            signal_mode = analysis.get('signal_mode', 'MEAN_REVERSION')
+            
             # Otonom Trade & Gelecek Görme (Golden Score)
-            # Sadece 8+ skorlarda sinyal üretilir. Zıt sinyal geldiğinde,
-            # eğer sinyal şiddeti (Skor) 9'dan küçükse pozisyonu KORU (Take Profit veya Stop bekle).
+            # Skor >= 5 (AL/SAT ve GUCLU_AL/GUCLU_SAT) sinyallerinde işlem açılır.
+            # Zıt sinyal geldiğinde, eğer sinyal şiddeti (Skor) 9'dan küçükse pozisyonu KORU.
             score = analysis.get('score', 0.0)
             if score >= 4.0 or score <= -4.0:
-                self.debug_logs.append(f"Idx {i}: Score={score}, Sig={signal}, Details={analysis.get('details')}")
+                self.debug_logs.append(f"Idx {i}: Score={score}, Sig={signal}, Mode={signal_mode}, Details={analysis.get('details')}")
                 
-            if signal == "GUCLU_AL":
+            if signal in ("GUCLU_AL", "AL"):
                 if self.position == 'SHORT':
                     if score >= 9.0: 
                         self.close_position(current_price, current_idx, reason="STRONG_REVERSAL")
@@ -173,9 +176,9 @@ class BacktestSimulator:
                         pass # Zayıf dönüş sinyallerini yoksay, trendi ve hedefi koru
                         
                 if self.position is None:
-                    self.open_position('LONG', current_price, current_idx, atr)
+                    self.open_position('LONG', current_price, current_idx, atr, signal_mode=signal_mode)
             
-            elif signal == "GUCLU_SAT":
+            elif signal in ("GUCLU_SAT", "SAT"):
                 if self.position == 'LONG':
                     if score <= -9.0:
                         self.close_position(current_price, current_idx, reason="STRONG_REVERSAL")
@@ -183,7 +186,7 @@ class BacktestSimulator:
                         pass # Trendi ve hedefi koru
                         
                 if self.position is None:
-                    self.open_position('SHORT', current_price, current_idx, atr)
+                    self.open_position('SHORT', current_price, current_idx, atr, signal_mode=signal_mode)
                     
             # Günlük Döküm (Kapanış)
             try:
@@ -210,12 +213,17 @@ class BacktestSimulator:
             
         return self.generate_report()
 
-    def open_position(self, side: str, price: float, timestamp: Any, atr: float = 0.0):
-        # 1. STOP MESAFESİ (ATR Bazlı) - MEAN REVERSION SCALPING
-        # Ortalamaya Dönüşte stop kısa, hedefler net olmalıdır.
+    def open_position(self, side: str, price: float, timestamp: Any, atr: float = 0.0, signal_mode: str = 'MEAN_REVERSION'):
+        # 1. STOP MESAFESİ (ATR Bazlı) - Signal Mode'a göre ayarlanır
+        # TREND_FOLLOWING: Geniş SL/TP (trendi yakalamak için nefes alanı)
+        # MEAN_REVERSION: Sıkı SL/TP (ortalamaya dönüşte vur-kaç)
         if atr and atr > 0:
-            stop_distance = atr * 2.0  # Bıçak tutmaya karşı sıkı stop
-            tp_distance = atr * 2.5    # Çok hızlı kâr al (Vur-kaç)
+            if signal_mode == 'TREND_FOLLOWING':
+                stop_distance = atr * 3.0  # Trende nefes alanı bırak
+                tp_distance = atr * 4.0    # Trend hedefi geniş tut
+            else:
+                stop_distance = atr * 2.0  # Bıçak tutmaya karşı sıkı stop
+                tp_distance = atr * 2.5    # Çok hızlı kâr al (Vur-kaç)
         else:
             # Fallback: ATR hesaplanamazsa sabit %1.0
             stop_distance = price * 0.01
@@ -235,19 +243,21 @@ class BacktestSimulator:
         # DİNAMİK KALDIRAÇ YÖNETİMİ
         # Eğer istenilen büyüklüğü almak için kasamız + API'den gelen kaldıraç yetmiyorsa
         # Sistemi patlatmamak için kaldıracı sadece yetecek kadar dinamik artırırız (Max 50x korumalı).
+        # NOT: used_leverage bu işlem için geçerlidir, self.leverage asla mutasyona uğramaz.
+        used_leverage = self.leverage
         if desired_notional / self.leverage > self.balance:
             needed_leverage = desired_notional / self.balance
             if needed_leverage > 50.0:
                 needed_leverage = 50.0
                 desired_notional = self.balance * 50.0
-            self.leverage = needed_leverage
+            used_leverage = needed_leverage
             notional_value = desired_notional
             self.position_size = notional_value / price
-            required_margin = notional_value / self.leverage
+            required_margin = notional_value / used_leverage
         else:
             notional_value = desired_notional
             self.position_size = raw_position_size
-            required_margin = notional_value / self.leverage
+            required_margin = notional_value / used_leverage
 
         # Kesinti (Fee)
         fee = notional_value * self.taker_fee
@@ -284,7 +294,9 @@ class BacktestSimulator:
             "fee": round(fee, 2),
             "balance_after": round(self.balance, 2),
             "sl": round(self.stop_loss_price, 6),
-            "tp": round(self.take_profit_price, 6)
+            "tp": round(self.take_profit_price, 6),
+            "used_leverage": round(used_leverage, 2),
+            "signal_mode": signal_mode
         })
 
     def close_position(self, price: float, timestamp: Any, reason: str = "", portion: float = 1.0):

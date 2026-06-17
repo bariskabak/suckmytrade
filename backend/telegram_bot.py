@@ -2,14 +2,20 @@ import os
 import telebot
 import urllib.request
 import json
+import time as time_module
 
 # Token'ı environment variable'dan al (.env içinden veya Render/Railway panelinden gelecek)
 TOKEN = os.environ.get("TELEGRAM_TOKEN", "")
 PORT = os.environ.get("PORT", 8000)
 API_BASE = f"http://127.0.0.1:{PORT}/api"
 
+# Kayıtlı kullanıcılar dosyası
+USERS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "registered_users.json")
+
 # Telebot objesini oluştur
-bot = telebot.TeleBot(TOKEN) if TOKEN else None
+# NOT: Bot objesi her zaman oluşturulmalı ki dekoratörler (@bot.message_handler) hata vermesin.
+# Token boşsa polling'de hata verir ama start() fonksiyonu zaten kontrol ediyor.
+bot = telebot.TeleBot(TOKEN if TOKEN else "123456789:placeholder_token_will_not_poll")
 
 def fetch_api(endpoint):
     try:
@@ -19,6 +25,43 @@ def fetch_api(endpoint):
     except Exception as e:
         print(f"API Hatası ({endpoint}): {e}")
         return None
+
+# ═══════════════════════════════════════════════
+# KULLANICI KAYIT SİSTEMİ
+# ═══════════════════════════════════════════════
+
+def load_registered_users():
+    """Kayıtlı kullanıcı chat_id'lerini dosyadan yükler"""
+    try:
+        if os.path.exists(USERS_FILE):
+            with open(USERS_FILE, 'r') as f:
+                return json.load(f)
+    except Exception as e:
+        print(f"Kullanıcı dosyası okuma hatası: {e}")
+    return []
+
+def save_registered_users(users):
+    """Kayıtlı kullanıcı chat_id'lerini dosyaya yazar"""
+    try:
+        with open(USERS_FILE, 'w') as f:
+            json.dump(users, f)
+    except Exception as e:
+        print(f"Kullanıcı dosyası yazma hatası: {e}")
+
+def send_notification(text):
+    """Tüm kayıtlı kullanıcılara bildirim gönderir"""
+    if not bot or not TOKEN:
+        return
+    users = load_registered_users()
+    for chat_id in users:
+        try:
+            bot.send_message(chat_id, text)
+        except Exception as e:
+            print(f"Bildirim gönderme hatası (chat_id: {chat_id}): {e}")
+
+# ═══════════════════════════════════════════════
+# KOMUTLAR
+# ═══════════════════════════════════════════════
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
@@ -30,9 +73,33 @@ def send_welcome(message):
         "🎯 /sinyaller - Güçlü AL/SAT sinyali veren hisseler\n"
         "🌍 /makro - Makro ekonomik durum ve küresel endeksler\n"
         "🔍 /hisse [KOD] - Seçtiğiniz hissenin detaylı analizi (Örn: /hisse THYAO)\n"
-        "⚙️ /durum - Sistem sağlık durumu"
+        "⚙️ /durum - Sistem sağlık durumu\n"
+        "🔔 /kayit - Otomatik sinyal bildirimi için kaydol\n"
+        "🔕 /kayitiptal - Bildirim kaydını iptal et"
     )
     bot.reply_to(message, text, parse_mode="Markdown")
+
+@bot.message_handler(commands=['kayit'])
+def register_user(message):
+    chat_id = message.chat.id
+    users = load_registered_users()
+    if chat_id not in users:
+        users.append(chat_id)
+        save_registered_users(users)
+        bot.reply_to(message, "✅ Bildirim kaydınız oluşturuldu! Artık güçlü sinyaller otomatik olarak size gönderilecek.")
+    else:
+        bot.reply_to(message, "ℹ️ Zaten kayıtlısınız. Güçlü sinyaller otomatik olarak size gönderilmeye devam edecek.")
+
+@bot.message_handler(commands=['kayitiptal'])
+def unregister_user(message):
+    chat_id = message.chat.id
+    users = load_registered_users()
+    if chat_id in users:
+        users.remove(chat_id)
+        save_registered_users(users)
+        bot.reply_to(message, "🔕 Bildirim kaydınız iptal edildi. Artık otomatik sinyal bildirimi almayacaksınız.")
+    else:
+        bot.reply_to(message, "ℹ️ Zaten kayıtlı değilsiniz.")
 
 @bot.message_handler(commands=['durum'])
 def send_status(message):
@@ -65,23 +132,26 @@ def send_signals(message):
         sig = res.get("signal", "NOTR")
         score = res.get("score", 0.0)
         price = res.get("price", 0.0)
+        confidence = res.get("confidence", 0)
         
-        item = f"• *{sym.split('.')[0]}* - Fiyat: {price} (Skor: {score})"
+        name = sym.split('.')[0]
+        conf_str = f" | Güven: %{int(confidence)}" if confidence > 0 else ""
+        item = f"• {name} - Fiyat: {price} (Skor: {score}{conf_str})"
         if "AL" in sig:
             al_list.append(item)
         elif "SAT" in sig:
             sat_list.append(item)
             
-    text = "🎯 *GÜNCEL SİNYALLER*\n\n"
+    text = "🎯 GÜNCEL SİNYALLER\n\n"
     if al_list:
-        text += "🟩 *AL Sinyalleri:*\n" + "\n".join(al_list) + "\n\n"
+        text += "🟩 AL Sinyalleri:\n" + "\n".join(al_list) + "\n\n"
     if sat_list:
-        text += "🟥 *SAT Sinyalleri:*\n" + "\n".join(sat_list) + "\n\n"
+        text += "🟥 SAT Sinyalleri:\n" + "\n".join(sat_list) + "\n\n"
         
     if not al_list and not sat_list:
         text += "Şu an için güçlü bir AL veya SAT sinyali bulunmuyor. Piyasa yatay veya hisseler orta bantta (Nötr)."
         
-    bot.reply_to(message, text, parse_mode="Markdown")
+    bot.reply_to(message, text)
 
 @bot.message_handler(commands=['rapor'])
 def send_report(message):
@@ -96,16 +166,16 @@ def send_report(message):
     desc = outlook.get("description", "")
     gss = outlook.get("gss", 0.0)
     
-    text = f"📰 *PİYASA RAPORU* (GSS: {gss})\n\n"
-    text += f"*{title}*\n{desc}\n\n"
+    text = f"📰 PİYASA RAPORU (GSS: {gss})\n\n"
+    text += f"➤ {title}\n{desc}\n\n"
     
     recs = data.get("recommended_stocks", [])
     if recs:
-        text += "⭐ *ÖNE ÇIKAN HİSRELER:*\n"
+        text += "⭐ ÖNE ÇIKAN HİSSELER:\n"
         for r in recs:
-            text += f"• *{r.get('name', '')}*: {r.get('strategy', '')} (Hedef: {r.get('tp', '')})\n"
+            text += f"• {r.get('name', '')}: {r.get('strategy', '')} (Hedef: {r.get('tp', '')})\n"
             
-    bot.reply_to(message, text, parse_mode="Markdown")
+    bot.reply_to(message, text)
 
 @bot.message_handler(commands=['makro'])
 def send_macro(message):
