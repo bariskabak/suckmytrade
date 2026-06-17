@@ -1700,7 +1700,7 @@ async function fetchGapHunter() {
                     <div class="signal-card" style="border-left: 4px solid #FFD700; background: rgba(255, 215, 0, 0.05);">
                         <div class="sig-header">
                             <span class="sig-symbol">${c.symbol}</span>
-                            <span class="sig-badge" style="background: rgba(255, 215, 0, 0.2); color: #FFD700; font-weight: bold;">SKOR: ${c.score}</span>
+                            <span class="sig-badge" style="background: rgba(255, 215, 0, 0.2); color: #FFD700; font-weight: bold;">SKOR: ${c.score} / 100</span>
                         </div>
                         <div class="sig-body">
                             <div class="sig-detail"><span>Günün Zirvesine Yakınlık:</span> <strong>%${(c.close_ratio * 100).toFixed(1)}</strong></div>
