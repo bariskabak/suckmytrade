@@ -230,16 +230,26 @@ async def market_analysis_loop():
                         })
                         print(f"  📡 {symbol}: Akıllı Sinyal = {analysis['signal']} (Skor: {analysis['score']}, Güven: %{analysis.get('confidence', 0)})")
                         
-                        # Güçlü sinyallerde otomatik Telegram bildirimi
-                        if analysis["signal"] in ["GUCLU_AL", "GUCLU_SAT"]:
+                        # Tüm Sinyallerde otomatik Telegram bildirimi (AL/SAT dahil)
+                        if analysis["signal"] in ["AL", "GUCLU_AL", "SAT", "GUCLU_SAT"]:
                             emoji = "🟢" if "AL" in analysis["signal"] else "🔴"
+                            prefix = "🔥 GÜÇLÜ SİNYAL" if "GUCLU" in analysis["signal"] else "⚡ NORMAL SİNYAL"
+                            
+                            # Midas kontrolü için maksimum giriş fiyatı (%2 sınır)
+                            price = float(analysis['price'])
+                            if "AL" in analysis["signal"]:
+                                max_entry = price * 1.02
+                                advice = f"💡 Midas Kontrolü:\n- Alım Aralığı: {price:.2f} TL - {max_entry:.2f} TL\n- İptal Sınırı: {max_entry:.2f} TL üzeri uçmuşsa girmeyin!"
+                            else:
+                                min_entry = price * 0.98
+                                advice = f"💡 Midas Kontrolü:\n- Satış Aralığı: {price:.2f} TL - {min_entry:.2f} TL\n- İptal Sınırı: {min_entry:.2f} TL altına düşmüşse çoktan çakılmıştır."
+
                             notif_text = (
-                                f"{emoji} GÜÇLÜ SİNYAL: {symbol.split('.')[0]}\n"
-                                f"Sinyal: {analysis['signal']}\n"
-                                f"Fiyat: {analysis['price']}\n"
+                                f"{emoji} {prefix}: {symbol.split('.')[0]}\n"
+                                f"Fiyat: {price:.2f} TL\n"
                                 f"Skor: {analysis['score']} | Güven: %{analysis.get('confidence', 0)}\n"
-                                f"Strateji: {analysis.get('signal_mode', '')}\n"
-                                f"Detay: {', '.join(analysis.get('details', [])[:2])}"
+                                f"Strateji: {analysis.get('signal_mode', '')}\n\n"
+                                f"{advice}"
                             )
                             send_telegram_notification(notif_text)
                     
