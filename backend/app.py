@@ -339,7 +339,7 @@ async def gap_hunter_loop():
                     for symbol in active_pairs:
                         try:
                             # 1 günlük mum verisi al (Son 20 günü alıyoruz ki SMA hacim hesaplansın)
-                            df = await asyncio.to_thread(bist_client.fetch_candles, symbol, period="30d", timeframe="1d")
+                            df = await asyncio.to_thread(bist_client.fetch_candles, symbol, limit=30, timeframe="1d")
                             if df.empty or len(df) < 20:
                                 continue
                                 
@@ -388,7 +388,7 @@ async def get_gap_hunter_results():
     # Paralel çekim yapılabilir ama basitlik için sıralı (BIST verisini zorlamamak adına)
     for symbol in active_pairs:
         try:
-            df = await asyncio.to_thread(bist_client.fetch_candles, symbol, period="30d", timeframe="1d")
+            df = await asyncio.to_thread(bist_client.fetch_candles, symbol, limit=30, timeframe="1d")
             if df.empty or len(df) < 20:
                 continue
                 
