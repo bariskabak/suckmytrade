@@ -173,8 +173,23 @@ async def market_analysis_loop():
             
             print(f"🔄 Analiz döngüsü çalışıyor... BIST Seansı: {session_status} | GSS: {round(gss_value, 2)}")
             
-            # 3. BIST Hisselerini Güncelle
+            print("📊 Piyasa analizi yapılıyor...")
             tickers = await asyncio.to_thread(bist_client.fetch_tickers, active_pairs)
+            
+            # Sektör Rotasyonu / Ortalamaları
+            sector_data = {}
+            for sym, t_data in tickers.items():
+                if t_data and t_data.get("percentage") is not None:
+                    sector = config.SECTOR_MAP.get(sym, "Diğer")
+                    if sector not in sector_data:
+                        sector_data[sector] = {"sum": 0.0, "count": 0, "avg": 0.0}
+                    sector_data[sector]["sum"] += t_data["percentage"]
+                    sector_data[sector]["count"] += 1
+                    
+            for sec in sector_data:
+                sector_data[sec]["avg"] = round(sector_data[sec]["sum"] / sector_data[sec]["count"], 2)
+            
+            # 3. BIST Hisselerini Güncelle
             valid_tickers = {k: v for k, v in tickers.items() if v.get("last") is not None}
             
             if not valid_tickers:
@@ -194,6 +209,14 @@ async def market_analysis_loop():
                     
                     # Küresel skor ile harmanlanmış teknik analiz yap
                     analysis = MarketAnalyzer.analyze(df, gss_value)
+                    
+                    # Bilanço Takvimi Kontrolü
+                    earnings_dt = await asyncio.to_thread(bist_client.fetch_earnings_date, symbol)
+                    days_to_earnings = None
+                    if earnings_dt:
+                        delta = earnings_dt - datetime.now().date()
+                        if 0 <= delta.days <= 7:
+                            days_to_earnings = delta.days
                     
                     # Ticker verisini ekle
                     ticker_info = tickers.get(symbol, {"last": None, "percentage": None})
@@ -244,11 +267,21 @@ async def market_analysis_loop():
                                 min_entry = price * 0.98
                                 advice = f"💡 Midas Kontrolü:\n- Satış Aralığı: {price:.2f} TL - {min_entry:.2f} TL\n- İptal Sınırı: {min_entry:.2f} TL altına düşmüşse çoktan çakılmıştır."
 
+                            # Sektör Rotasyonu Desteği
+                            sector_name = config.SECTOR_MAP.get(symbol, "Diğer")
+                            sector_perf = sector_data.get(sector_name, {}).get("avg", 0.0)
+                            sector_info = f"\n🔄 Sektör ({sector_name}): {'Pozitif (Para Giriyor) 🟩' if sector_perf > 0 else 'Negatif 🟥'}"
+                            
+                            # Bilanço Uyarısı
+                            earnings_warning = ""
+                            if days_to_earnings is not None:
+                                earnings_warning = f"\n\n⚠️ DİKKAT: Şirketin {days_to_earnings} gün sonra bilançosu var! Teknik analiz yanıltıcı olabilir, temkinli olun."
+
                             notif_text = (
                                 f"{emoji} {prefix}: {symbol.split('.')[0]}\n"
                                 f"Fiyat: {price:.2f} TL\n"
                                 f"Skor: {analysis['score']} | Güven: %{analysis.get('confidence', 0)}\n"
-                                f"Strateji: {analysis.get('signal_mode', '')}\n\n"
+                                f"Strateji: {analysis.get('signal_mode', '')}{sector_info}{earnings_warning}\n\n"
                                 f"{advice}"
                             )
                             send_telegram_notification(notif_text)
@@ -268,6 +301,7 @@ async def market_analysis_loop():
                     "bist_status": bist_status,
                     "session_status": session_status,
                     "global_indices": global_indices_data,
+                    "sectors": sector_data,
                     "gss": round(gss_value, 2),
                     "live_trading": live_trader.get_status()
                 }

@@ -424,6 +424,9 @@ function connectWebSocket() {
             }
             if (payload.data.gss !== undefined) {
                 updateGlobalSentiment(payload.data.gss, payload.data.global_indices);
+                if (payload.data.sectors) {
+                    updateSectorHeatmap(payload.data.sectors);
+                }
             }
             
             // Set active timeframe button state
@@ -1745,4 +1748,32 @@ async function fetchGapHunter() {
         btn.disabled = false;
         btn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> Şimdi Tara';
     }
+}
+
+// Sector Heatmap UI
+function updateSectorHeatmap(sectorsData) {
+    const grid = document.getElementById('sector-heatmap-grid');
+    if (!grid) return;
+    
+    // Sort sectors by average performance (descending)
+    const sortedSectors = Object.entries(sectorsData)
+        .map(([name, data]) => ({ name, avg: data.avg }))
+        .sort((a, b) => b.avg - a.avg);
+        
+    // Take top 4 and bottom 2, or just top 8
+    const displaySectors = sortedSectors.slice(0, 8);
+    
+    grid.innerHTML = displaySectors.map(s => {
+        let colorClass = "";
+        let sign = "";
+        if (s.avg > 0) { colorClass = "text-success"; sign = "+"; }
+        else if (s.avg < 0) { colorClass = "text-danger"; }
+        
+        return `
+            <div class="global-idx-item">
+                <span class="idx-name" style="font-size: 0.75rem;">${s.name.substring(0, 15)}</span>
+                <span class="idx-val ${colorClass}">${sign}${s.avg.toFixed(2)}%</span>
+            </div>
+        `;
+    }).join('');
 }

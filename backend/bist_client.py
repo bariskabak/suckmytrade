@@ -1,11 +1,36 @@
 import yfinance as yf
 import pandas as pd
 import time
+import requests
+import datetime
 from typing import List, Dict, Any, Optional
 
 class BISTClient:
     def __init__(self):
-        pass
+        self.session = requests.Session()
+        # Yahoo Finance BIST hisselerinde .IS uzantısı gerektirir
+        # Bazı global endeksler için prefix/suffix mapping
+        self.earnings_cache = {}
+
+    def fetch_earnings_date(self, symbol: str) -> Optional[datetime.date]:
+        """Hissenin yaklaşan bilanço tarihini yfinance üzerinden çeker ve önbellekler."""
+        if symbol in self.earnings_cache:
+            return self.earnings_cache[symbol]
+            
+        try:
+            tk = yf.Ticker(symbol)
+            cal = tk.calendar
+            if isinstance(cal, dict) and 'Earnings Date' in cal and cal['Earnings Date']:
+                dates = cal['Earnings Date']
+                if dates and isinstance(dates, list) and len(dates) > 0:
+                    dt = dates[0]
+                    self.earnings_cache[symbol] = dt
+                    return dt
+        except Exception as e:
+            pass
+            
+        self.earnings_cache[symbol] = None
+        return None
 
     @staticmethod
     def _safe_float(val):

@@ -17,6 +17,59 @@ DEFAULT_PAIRS = [
     "ZOREN.IS", "IZMDC.IS", "TATEN.IS", "ENERY.IS"
 ]
 
+SECTOR_MAP = {
+    # Bankacılık
+    "AKBNK.IS": "Bankacılık", "GARAN.IS": "Bankacılık", "ISCTR.IS": "Bankacılık", 
+    "YKBNK.IS": "Bankacılık", "HALKB.IS": "Bankacılık", "VAKBN.IS": "Bankacılık",
+    "TSKB.IS": "Bankacılık", "ALBRK.IS": "Bankacılık", "SKBNK.IS": "Bankacılık",
+    "ISMEN.IS": "Bankacılık/Finans",
+    
+    # Holding
+    "KCHOL.IS": "Holding", "SAHOL.IS": "Holding", "ENKAI.IS": "Holding", 
+    "DOHOL.IS": "Holding", "TKFEN.IS": "Holding", "ALARK.IS": "Holding",
+    
+    # Havacılık / Ulaştırma
+    "THYAO.IS": "Havacılık", "PGSUS.IS": "Havacılık",
+    
+    # Otomotiv
+    "FROTO.IS": "Otomotiv", "TOASO.IS": "Otomotiv", "OTKAR.IS": "Otomotiv", "EGEEN.IS": "Otomotiv",
+    
+    # Enerji / Petrol
+    "TUPRS.IS": "Petrol/Kimya", "PETKM.IS": "Petrol/Kimya", "ASTOR.IS": "Enerji", 
+    "ALFAS.IS": "Enerji", "CWENE.IS": "Enerji", "EUPWR.IS": "Enerji", "GESAN.IS": "Enerji", 
+    "SMRTG.IS": "Enerji", "YEOTK.IS": "Enerji", "ZOREN.IS": "Enerji", "TATEN.IS": "Enerji", 
+    "ENERY.IS": "Enerji", "AKSEN.IS": "Enerji", "ODAS.IS": "Enerji",
+    
+    # Perakende / Ticaret
+    "BIMAS.IS": "Perakende", "MGROS.IS": "Perakende", "SOKM.IS": "Perakende", "MAVI.IS": "Perakende",
+    
+    # Teknoloji / Savunma / Yazılım
+    "ASELS.IS": "Savunma", "MIATK.IS": "Teknoloji", "REEDR.IS": "Teknoloji", "KONTR.IS": "Teknoloji", "SDTTR.IS": "Teknoloji",
+    
+    # Telekom
+    "TTKOM.IS": "Telekomünikasyon", "TCELL.IS": "Telekomünikasyon",
+    
+    # Demir-Çelik / Sanayi
+    "EREGL.IS": "Demir Çelik", "KRDMD.IS": "Demir Çelik", "BRSAN.IS": "Demir Çelik", 
+    "CIMSA.IS": "Çimento", "OYAKC.IS": "Çimento", "KLSER.IS": "Seramik", "KBORU.IS": "Sanayi",
+    "BRYAT.IS": "Sanayi", "IZMDC.IS": "Demir Çelik",
+    
+    # Madencilik / Altın
+    "KOZAL.IS": "Madencilik", "KOZAA.IS": "Madencilik",
+    
+    # Gıda / Tarım
+    "HEKTS.IS": "Tarım", "GUBRF.IS": "Tarım", "TABGD.IS": "Gıda",
+    
+    # Kimya
+    "SASA.IS": "Kimya", "SISE.IS": "Cam/Kimya",
+    
+    # GYO / İnşaat
+    "EKGYO.IS": "Gayrimenkul",
+    
+    # Dayanıklı Tüketim
+    "VESBE.IS": "Dayanıklı Tüketim"
+}
+
 # Başlangıçta aktif olarak takip edilecek varsayılan hisseler (VİOP Odaklı)
 DEFAULT_ACTIVE_PAIRS = [
     "AKBNK.IS", "ALARK.IS", "ASELS.IS", "ASTOR.IS", "BIMAS.IS", 
